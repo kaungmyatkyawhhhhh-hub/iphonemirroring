@@ -73,10 +73,18 @@ In Settings you can change the frame rate, JPEG quality and stream scale. Lower 
 
 ## Set up view-only AirPlay mode
 
-1. Install **Bonjour** for Windows. It comes with iTunes, or you can install Apple's *Bonjour Print Services*.
-2. Install [UxPlay](https://github.com/FDH2/UxPlay), an open-source AirPlay mirroring receiver, by following its Windows instructions. iMirror looks for `uxplay.exe` on your PATH, in `C:\msys64\ucrt64\bin`, in `C:\Program Files\UxPlay`, and in a `bin` folder next to iMirror. You can also set the path in Settings.
-3. **iMirror → AirPlay receiver.** Allow it through Windows Firewall when asked.
-4. On the iPhone: **Control Center → Screen Mirroring → iMirror**. The PC and the phone must be on the same network.
+1. Build [UxPlay](https://github.com/FDH2/UxPlay), an open-source AirPlay mirroring receiver, with MSYS2. Install MSYS2 from https://www.msys2.org/, open the **MSYS2 UCRT64** terminal, and run:
+   ```
+   pacman -Syu
+   pacman -S git mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-ninja mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-libplist mingw-w64-ucrt-x86_64-gstreamer mingw-w64-ucrt-x86_64-gst-plugins-base mingw-w64-ucrt-x86_64-gst-plugins-good mingw-w64-ucrt-x86_64-gst-plugins-bad mingw-w64-ucrt-x86_64-gst-libav
+   git clone https://github.com/FDH2/UxPlay
+   cd UxPlay && mkdir build && cd build
+   cmake .. && ninja
+   cmake --install . --prefix $HOME/../../ucrt64
+   ```
+   This installs `C:\msys64\ucrt64\bin\uxplay.exe`, where iMirror finds it automatically. UxPlay 1.74 and later doesn't need Bonjour. iMirror also looks for `uxplay.exe` on your PATH, and you can set the path in Settings.
+2. **iMirror → AirPlay receiver.** Allow `uxplay.exe` through Windows Firewall when asked. Your PC's network should be set to **Private**.
+3. On the iPhone: **Control Center → Screen Mirroring → iMirror**. The PC and the phone must be on the same Wi-Fi.
 
 ## Trying it without an iPhone
 

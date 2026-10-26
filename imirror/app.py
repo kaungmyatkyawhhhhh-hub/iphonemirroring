@@ -483,7 +483,7 @@ class MainWindow(QMainWindow):
             QMessageBox.information(
                 self,
                 "AirPlay receiver not found",
-                "AirPlay mode uses UxPlay (an open-source AirPlay receiver) and Apple's Bonjour service.\n\n"
+                "AirPlay mode uses UxPlay, an open-source AirPlay receiver.\n\n"
                 "Install UxPlay for Windows (see README), or set its path in Settings.",
             )
             return
